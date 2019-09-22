@@ -10,8 +10,6 @@ require_relative '../lib/main.rb'
 
 ### help
 
-### Leader board
-
 ### Start
 
 ### Choose your player: X or O
@@ -22,4 +20,5 @@ main.new_game
 main.set_cell_value(input: 'B1')
 main.set_cell_value(input: 'B2')
 main.set_cell_value(input: 'B3')
-main.set_cell_value(input: 'B3')
+
+main.check_for_winner!

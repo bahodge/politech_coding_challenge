@@ -3,6 +3,8 @@ require "rubygems"
 require_relative 'game/state'
 require_relative 'game/turn'
 require_relative 'game/board'
+require_relative 'game/winner_helper'
+
 
 module TicTackToe
   class Main
@@ -19,6 +21,11 @@ module TicTackToe
       get_player_symbol_choice
       set_computer_player
       initial_game_board
+    end
+
+    def check_for_winner!
+      helper = Game::WinnerHelper.with(board: self.board)
+      p helper.check!
     end
 
     def get_player_symbol_choice
