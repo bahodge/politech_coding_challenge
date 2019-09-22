@@ -30,6 +30,7 @@ module TicTackToe
 
     def initialize_game_board
       @board = Game::Board.new
+      @board.draw_board
     end
 
     def initialize_game_state

@@ -3,20 +3,31 @@ require_relative 'row'
 module Game
   class Board
     
-    attr_reader :grid
+    attr_accessor :rows
 
-    def initialize(grid: nil)
-      @grid = grid ? grid : initial_grid
+    def initialize(rows: nil)
+      @rows = rows ? rows : initial_rows
+    end
+    
+    def draw_board
+      puts board_header
+      puts "1 -> #{rows[0].to_line}"
+      puts '     ===+===+==='
+      puts "2 -> #{rows[1].to_line}"
+      puts '     ===+===+==='
+      puts "3 -> #{rows[2].to_line}"
+    end
+
+    def find_row_by_y(y: )
+      self.rows.find { |row| row.y == y } 
     end
 
     def find_cell_from_input(input: )
       coords = coords_from_input(input: input)
       return nil unless valid_coords?(coords: coords)
-      return nil unless self.grid
-      self.grid.each do |row|
-        result = row.find_cell_by_coords(coords: coords)
-        return result unless result.nil?
-      end
+      return nil unless self.rows
+      row = find_row_by_y(y: coords.last)
+      row&.find_cell_by_x(x: coords.first)
     end
 
     # this returns a tuple of [x, y] coords
@@ -38,7 +49,11 @@ module Game
 
     private
 
-    def initial_grid
+    def board_header
+      '      A   B   C'
+    end
+
+    def initial_rows
       [
         Game::Row.new(y: 0),
         Game::Row.new(y: 1),
@@ -46,20 +61,20 @@ module Game
       ]
     end
 
-    # def x_char_to_coord(char: )
-    #   return 0 if char == 'A'
-    #   return 1 if char == 'B'
-    #   return 2 if char == 'C'
-    #   -1
-    # end
+    def x_char_to_coord(char: )
+      return 0 if char == 'A'
+      return 1 if char == 'B'
+      return 2 if char == 'C'
+      -1
+    end
 
-    # def y_char_to_coord(char: )
-    #   i = char.to_i
-    #   return 0 if i == 1
-    #   return 1 if i == 2
-    #   return 2 if i == 3
-    #   -1
-    # end
+    def y_char_to_coord(char: )
+      i = char.to_i
+      return 0 if i == 1
+      return 1 if i == 2
+      return 2 if i == 3
+      -1
+    end
   end
 
 end

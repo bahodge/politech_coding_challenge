@@ -56,7 +56,7 @@ RSpec.describe Game::Board do
       let(:valid_input_3) { "C3" }
       let(:valid_input_4) { 'a     2 '}
       it "finds the cell" do
-        expect(subject.grid).to_not eq([])
+        expect(subject.rows).to_not eq([])
 
         expect(subject.find_cell_from_input(input: valid_input_1)).to_not be_nil
         expect(subject.find_cell_from_input(input: valid_input_2)).to_not be_nil
@@ -69,7 +69,7 @@ RSpec.describe Game::Board do
       let(:invalid_input_2) { "2B" }  
       let(:invalid_input_3) { "" }
       it "returns nil" do
-        expect(subject.grid).to_not eq([])
+        expect(subject.rows).to_not eq([])
         expect(subject.find_cell_from_input(input: invalid_input_1)).to be_nil
         expect(subject.find_cell_from_input(input: invalid_input_2)).to be_nil
         expect(subject.find_cell_from_input(input: invalid_input_3)).to be_nil

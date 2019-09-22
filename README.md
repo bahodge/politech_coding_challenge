@@ -14,9 +14,15 @@
 
 This will acts as my development diary as I develop the application
 
-### Setting up the project
+### Phase 1
 
 - I rarely use plan old ruby projects, so setting up goes differently then "rails new"
 - I created the directory structure along with installing 2 gems I know I'll be using, `rspec` and `values`
 - Made initial script to be run to start the program. `bin/tic_tack_toe.rb`
-- 
+
+### Phase 2
+
+- Build board so that is populates with defaults
+- Build row -> holds cells
+- Build cells -> holds coords and values (data objects)
+

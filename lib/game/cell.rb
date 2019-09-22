@@ -8,6 +8,10 @@ module Game
       "#{x_to_input}#{self.y}"
     end
 
+    def set_value(new_value: )
+      Game::Cell.with(x: self.x, y: self.y, value: new_value)
+    end
+
     private
 
     def x_to_input
