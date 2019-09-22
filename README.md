@@ -25,4 +25,5 @@ This will acts as my development diary as I develop the application
 - Build board so that is populates with defaults
 - Build row -> holds cells
 - Build cells -> holds coords and values (data objects)
-
+- Fill a cell with a specific value
+  
