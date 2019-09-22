@@ -16,4 +16,10 @@ require_relative '../lib/main.rb'
 
 ### Choose your player: X or O
 
-puts TicTackToe::Main.new.new_game
+main = TicTackToe::Main.new
+main.new_game
+
+main.set_cell_value(input: 'B1')
+main.set_cell_value(input: 'B2')
+main.set_cell_value(input: 'B3')
+main.set_cell_value(input: 'B3')
