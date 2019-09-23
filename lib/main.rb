@@ -43,7 +43,7 @@ module TicTackToe
     end
 
     def handle_computer_move
-      Game::Computer.with(board: self.board).make_move!
+      Game::Computer.with(board: self.board, symbol: self.computer).make_move!
     end
 
     def handle_winner!
@@ -88,6 +88,7 @@ module TicTackToe
       rescue ArgumentError => e
         puts e
         puts "Please Try Again"
+        play_turn
       end
     end
 

@@ -22,7 +22,6 @@ module Game
     end
 
     def draw_board
- 
       puts 
       puts 
       puts 
