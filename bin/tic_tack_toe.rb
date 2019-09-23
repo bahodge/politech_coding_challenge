@@ -34,7 +34,7 @@ def start_game
   main.play_turn
 end
 
-first_argument = 
+# first_argument = 
 
 if ARGV[0] == '--help' || ARGV[0] == '-h'
   help
