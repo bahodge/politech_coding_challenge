@@ -8,7 +8,10 @@
 
 ### How to run
 
+- `bundle install` or `bundle`
 - `ruby bin/tic_tack_toe.rb`
+- `ruby bin/tic_tack_toe.rb --help` 
+- `ruby bin/tic_tack_toe.rb --rules` 
 
 ## Dev Diary
 
@@ -43,3 +46,48 @@ This will acts as my development diary as I develop the application
 
 - Overall Cleanup and refactoring
 - Finish the CLI
+- Added some test for computer_spec
+
+## Postmortum
+
+- The Sads
+  - Wish I could have made a better AI
+  - Wish I would have organized my code better
+  - Wish I would have researched more on building AI
+  - State doesn't do much
+  - There are some edge cases that I can't account for yet
+  - The AI doesn't try to defend itself from player wins
+  - Winner helper should be more efficient
+  - Computer should be more efficient
+
+- The Glads
+  - Built all in one day.
+  - Built using TDD
+  - Able to use Values effectively
+  - Turn is the only real holder of state
+  - Had a rough draft in 30 minutes
+
+- Things I learned
+  - Organizing a "railsless" directory structure
+  - Accepting ARGS in ruby script
+  - Using spec without rails
+  - I love building from scratch
+
+- How To improve
+  - Better AI
+  - Better state management
+  - Better Tests
+  - Add Leaderboard
+    - Add abillty to share with friends / social media
+  - Add Persisted Database
+  - Add UI (not console)
+  - Add more CLI options
+  - Refactor Board, Computer and Winner Helper as they are the slowest pieces
+  - Make everything a value object
+  - Add a caching layer
+
+- Takeaways
+  - Had fun building the overall application
+  - Wish I would have had more time to dedicate to fleshing out parts I wasn't happy with
+  - Wish I had used more libraries / packages to solve a bunch of the little things for me
+  
