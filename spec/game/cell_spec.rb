@@ -12,17 +12,17 @@ RSpec.describe Game::Cell do
   describe "#coords_to_input" do
     context "if x is 0" do
       it { expect(subject.x).to eq(0) }
-      it { expect(subject.coords_to_input).to eq("A#{y}") }
+      it { expect(subject.coords_to_input).to eq("A#{y + 1}") }
     end
     context "if x is 1" do
       let(:x) { 1 }
       it { expect(subject.x).to eq(1) }
-      it { expect(subject.coords_to_input).to eq("B#{y}") }
+      it { expect(subject.coords_to_input).to eq("B#{y + 1}") }
     end
     context "if x is 2" do
       let(:x) { 2 }
       it { expect(subject.x).to eq(2) }
-      it { expect(subject.coords_to_input).to eq("C#{y}") }
+      it { expect(subject.coords_to_input).to eq("C#{y + 1}") }
     end
   end
 

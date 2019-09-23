@@ -9,7 +9,7 @@ module Game
 
     def make_move!
       if resolve_best_move.nil? || resolve_best_move.empty?
-          raise ArgumentError, "Computer Player Cannot Move" 
+        raise ArgumentError, "Computer Player Cannot Move" 
       end
       input = resolve_best_move[:cell].coords_to_input
 
@@ -20,7 +20,8 @@ module Game
 
     def resolve_best_move
       if categorize_moves[:best_moves] != []
-        pick_random_move(move_set: categorize_moves[:best_moves])
+        p categorize_moves[:best_moves].first
+        categorize_moves[:best_moves].first
       elsif categorize_moves[:good_moves] != []
         pick_random_move(move_set: categorize_moves[:good_moves])
       elsif categorize_moves[:bad_moves] != []
@@ -78,13 +79,10 @@ module Game
       helper = Game::WinnerHelper.with(board: test_board)
       result = helper.check!
       
-      if result
-        winning_symbol = result.first.value
-        if winning_symbol == self.symbol 
-          return {cell: cell, grade: 1}
-        else
-          return {cell: cell, grade: -1}
-        end
+      if result && result.first.value == self.symbol
+        {cell: cell, grade: 1}
+      elsif result && result.first.value != self.symbol
+        {cell: cell, grade: -1}
       else
         {cell: cell, grade: 0}
       end
