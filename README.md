@@ -27,3 +27,8 @@ This will acts as my development diary as I develop the application
 - Build cells -> holds coords and values (data objects)
 - Fill a cell with a specific value
   
+### Phase 3
+
+- Adding basic game functionality like tracking who's turn it is and alternating turns.
+- Checking to see if there is a winner
+- Adding main game / turn loop

@@ -4,12 +4,13 @@ require 'game/cell'
 RSpec.describe Game::Row do
   subject { described_class.new(y: y) }
 
+
   let(:y) { 0 }
 
   describe "#to_line" do
-    let(:cell_1) { Game::Cell.with(x: 0, y: subject.y, value: 'X') }
-    let(:cell_2) { Game::Cell.with(x: 1, y: subject.y, value: 'O') }
-    let(:cell_3) { Game::Cell.with(x: 2, y: subject.y, value: 'X') }
+    let(:cell_1) { Game::Cell.with(row: subject, x: 0, y: subject.y, value: 'X') }
+    let(:cell_2) { Game::Cell.with(row: subject, x: 1, y: subject.y, value: 'O') }
+    let(:cell_3) { Game::Cell.with(row: subject, x: 2, y: subject.y, value: 'X') }
     let(:cells) { [cell_1, cell_2, cell_3] }
     before(:each) { subject.cells = cells }
     it "returns a formatted line of cell values" do
