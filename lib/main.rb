@@ -40,7 +40,30 @@ module TicTackToe
     end
 
     def handle_computer_move
-      Game::Computer.with(board: self.board, symbol: self.computer).make_move!
+      begin
+        Game::Computer.with(board: self.board, symbol: self.computer).make_move!
+
+      rescue ArgumentError => e
+        puts e
+        handle_tie!
+      end
+    end
+
+    def handle_tie!
+      puts "It is a Tie"
+      
+      self.board.draw_board
+
+      puts "+=========================================+"
+      puts "| The Winner is: Tie                      |"
+      puts "| Would you like to play again? [ Y | N ] |"
+      puts "+=========================================+"
+      input = gets
+      if input[0].upcase == "Y"
+        new_game
+      else
+        exit 0
+      end
     end
 
     def handle_winner!

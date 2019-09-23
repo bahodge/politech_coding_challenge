@@ -8,33 +8,37 @@ module Game
   class Computer < Value.new(:board, :symbol)
 
     def make_move!
-        if resolve_best_move == nil || resolve_best_move.empty?
-          raise ArgumentError, "Cannot Move" 
-        end
-        input = resolve_best_move[:cell].coords_to_input
+      if resolve_best_move.nil? || resolve_best_move.empty?
+          raise ArgumentError, "Computer Player Cannot Move" 
+      end
+      input = resolve_best_move[:cell].coords_to_input
 
-        self.board.set_cell_value(input: input, value: symbol)
+      self.board.set_cell_value(input: input, value: symbol)
     end
 
     private
 
     def resolve_best_move
-      return pick_random_move(move_set: categorize_moves[:best_moves]) unless categorize_moves[:best_moves].empty?
-      return pick_random_move(move_set: categorize_moves[:good_moves]) unless categorize_moves[:good_moves].empty?
-      return pick_random_move(move_set: categorize_moves[:bad_moves]) unless categorize_moves[:bad_moves].empty?
-
-      {}
+      if categorize_moves[:best_moves] != []
+        pick_random_move(move_set: categorize_moves[:best_moves])
+      elsif categorize_moves[:good_moves] != []
+        pick_random_move(move_set: categorize_moves[:good_moves])
+      elsif categorize_moves[:bad_moves] != []
+        pick_random_move(move_set: categorize_moves[:bad_moves])
+      else
+        {}
+      end
     end
 
-    def pick_random_move(move_set:) 
-      result = rand(0..move_set.length).floor
+    def pick_random_move(move_set:)
+      max = move_set.length > 0 ? move_set.length - 1 : 0
+      result = rand(0..max).floor
       move_set[result]
     end
 
     def categorize_moves
       moves = { best_moves: [], good_moves: [], bad_moves: []}
       grade_moves.each do |move|
-
         if move[:grade] == 1  
           moves[:best_moves] << move
         elsif move[:grade] == 0
