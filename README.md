@@ -29,6 +29,7 @@ This will acts as my development diary as I develop the application
 - Build row -> holds cells
 - Build cells -> holds coords and values (data objects)
 - Fill a cell with a specific value
+- Able to read a specific cell with input
   
 ### Phase 3
 
@@ -41,12 +42,15 @@ This will acts as my development diary as I develop the application
 
 - Adding basic ai rules -> grade possible turns
 - making a move
+- Integrated computer with main
+- Imporved winner helper
 
 ### Phase 5
 
 - Overall Cleanup and refactoring
 - Finish the CLI
 - Added some test for computer_spec
+- Fixed a bit wrong with computer
 
 ## Postmortum
 
@@ -74,6 +78,7 @@ This will acts as my development diary as I develop the application
   - I love building from scratch
 
 - How To improve
+  - Better user input capture and sanitization
   - Better AI
   - Better state management
   - Better Tests
