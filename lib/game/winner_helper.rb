@@ -2,42 +2,69 @@ require 'values'
 
 module Game
   class WinnerHelper < Value.new(:board)
-
     def check!
-      # p "column_cells_a: #{column_cells_a.collect{|c| [c.x, c.y]}}"
-      # p "column_cells_b: #{column_cells_b.collect{|c| [c.x, c.y]}}"
-      # p "column_cells_c: #{column_cells_c.collect{|c| [c.x, c.y]}}"
-      # p "row_1_cells: #{row_1_cells.collect{|c| [c.x, c.y]}}"
-      # p "row_2_cells: #{row_2_cells.collect{|c| [c.x, c.y]}}"
-      # p "row_3_cells: #{row_3_cells.collect{|c| [c.x, c.y]}}"
-      p "diagonal_1_cells: #{diagonal_1_cells.collect{|c| [c.x, c.y]}}"
-      p "diagonal_2_cells: #{diagonal_2_cells.collect{|c| [c.x, c.y]}}"
+      all_cell_sets.each do |cell_set|
+        values = filter_cell_values(cell_set: cell_set)
+        return cell_set if all_match?(values: values)
+      end
+
+      nil
     end
 
-    def check_cell_set(cell_set: )
-      
+    def filter_cell_values(cell_set:)
+      filtered_values = []
+      cell_set.collect { |cell| cell.value }.each do |value|
+        if value == 'X' || value == 'O'
+          filtered_values << value
+        end
+      end
+      filtered_values
     end
 
-    def all_match?
+    def all_match?(values:)
+      return false unless values.length == 3
 
+      value_1, value_2, value_3 = values
+
+      return false unless value_1 == value_2
+      return false unless value_1 == value_3
+
+      true
     end
 
     private
 
+    def all_cell_sets
+      [
+        column_cells_a,
+        column_cells_b,
+        column_cells_c,
+        row_1_cells,
+        row_2_cells,
+        row_3_cells,
+        diagonal_1_cells,
+        diagonal_2_cells
+      ]
+    end
+
     def all_cells
-      self.board.rows.collect(&:cells).flatten
+      cells = []
+      self.board.rows.each do |row|
+        cells << row.cells
+      end
+      cells.flatten
     end
 
     def column_cells_a
-      all_cells.select {|cell| cell.x == 0 }
+      all_cells.select { |cell| cell.x == 0 }
     end
 
     def column_cells_b
-      all_cells.select {|cell| cell.x == 1 }
+      all_cells.select { |cell| cell.x == 1 }
     end
 
     def column_cells_c
-      all_cells.select {|cell| cell.x == 2 }
+      all_cells.select { |cell| cell.x == 2 }
     end
 
     def row_1_cells

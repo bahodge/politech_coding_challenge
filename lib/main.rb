@@ -5,7 +5,6 @@ require_relative 'game/turn'
 require_relative 'game/board'
 require_relative 'game/winner_helper'
 
-
 module TicTackToe
   class Main
     attr_accessor :board, :player, :computer, :turn, :state
@@ -23,9 +22,17 @@ module TicTackToe
       initial_game_board
     end
 
+    def play_game
+    end
+
+    def handle_winner(winning_cells:)
+      # find each cell and cross it out
+      puts "The Winner is: #{winning_cells.shift.value}"
+    end
+
     def check_for_winner!
       helper = Game::WinnerHelper.with(board: self.board)
-      p helper.check!
+      helper.check!
     end
 
     def get_player_symbol_choice
@@ -34,15 +41,9 @@ module TicTackToe
       symbol.strip!.upcase!
       if ['X', 'O'].include?(symbol)
         self.player = symbol
-        # puts "You are player: #{player}"
       else
         get_player_symbol_choice
       end
-    end
-
-    def set_computer_player
-      self.computer = self.player == 'X' ? 'O' : 'X'
-      # puts "Computer is: #{computer}"
     end
 
     def set_cell_value(input:)
@@ -64,6 +65,11 @@ module TicTackToe
     end
 
     private
+
+    def set_computer_player
+      self.computer = self.player == 'X' ? 'O' : 'X'
+      # puts "Computer is: #{computer}"
+    end
 
     def next_turn
       # check if someone won
