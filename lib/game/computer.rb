@@ -18,11 +18,16 @@ module Game
     private
 
     def resolve_best_move
-      return categorize_moves[:best_moves].first unless categorize_moves[:best_moves].empty?
-      return categorize_moves[:good_moves].first unless categorize_moves[:good_moves].empty?
-      return categorize_moves[:bad_moves].first unless categorize_moves[:bad_moves].empty?
+      return pick_random_move(move_set: categorize_moves[:best_moves]) unless categorize_moves[:best_moves].empty?
+      return pick_random_move(move_set: categorize_moves[:good_moves]) unless categorize_moves[:good_moves].empty?
+      return pick_random_move(move_set: categorize_moves[:bad_moves]) unless categorize_moves[:bad_moves].empty?
 
       {}
+    end
+
+    def pick_random_move(move_set:) 
+      result = rand(0..move_set.length).floor
+      move_set[result]
     end
 
     def categorize_moves

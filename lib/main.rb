@@ -25,6 +25,7 @@ module TicTackToe
 
     def play_turn
       puts "It is #{turn.current_turn}'s Turn"
+      self.board.draw_board
       if player == turn.current_turn
         puts "Please Select an open cell: "
         input = gets
@@ -34,11 +35,7 @@ module TicTackToe
       end
       handle_winner!
       self.turn = turn.next_turn
-      
-      self.board.draw_board
       play_turn
-      # next_turn
-      # who's turn is it?
       
     end
 
@@ -109,7 +106,6 @@ module TicTackToe
 
     def initial_game_board
       @board = Game::Board.new
-      @board.draw_board
     end
 
     def initial_turn
