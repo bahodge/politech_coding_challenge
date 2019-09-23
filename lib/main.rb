@@ -25,6 +25,7 @@ module TicTackToe
 
     def play_turn
       puts "It is #{turn.current_turn}'s Turn"
+      self.board.draw_board
       if player == turn.current_turn
         puts "Please Select an open cell: "
         input = gets
@@ -34,16 +35,12 @@ module TicTackToe
       end
       handle_winner!
       self.turn = turn.next_turn
-      
-      self.board.draw_board
       play_turn
-      # next_turn
-      # who's turn is it?
       
     end
 
     def handle_computer_move
-      Game::Computer.with(board: self.board).make_move!
+      Game::Computer.with(board: self.board, symbol: self.computer).make_move!
     end
 
     def handle_winner!
@@ -53,7 +50,7 @@ module TicTackToe
       self.board.draw_board
 
       puts "+=========================================+"
-      puts "| The Winner is: #{cells.shift.value}     |"
+      puts "| The Winner is: #{cells.shift.value}                        |"
       puts "| Would you like to play again? [ Y | N ] |"
       puts "+=========================================+"
       input = gets
@@ -88,6 +85,7 @@ module TicTackToe
       rescue ArgumentError => e
         puts e
         puts "Please Try Again"
+        play_turn
       end
     end
 
@@ -108,7 +106,6 @@ module TicTackToe
 
     def initial_game_board
       @board = Game::Board.new
-      @board.draw_board
     end
 
     def initial_turn
