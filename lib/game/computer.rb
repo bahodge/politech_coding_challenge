@@ -8,8 +8,9 @@ module Game
   class Computer < Value.new(:board, :symbol)
 
     def make_move!
-        raise ArgumentError, "Cannot Move" if resolve_best_move.empty?
-
+        if resolve_best_move == nil || resolve_best_move.empty?
+          raise ArgumentError, "Cannot Move" 
+        end
         input = resolve_best_move[:cell].coords_to_input
 
         self.board.set_cell_value(input: input, value: symbol)

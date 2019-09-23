@@ -50,7 +50,7 @@ module TicTackToe
       self.board.draw_board
 
       puts "+=========================================+"
-      puts "| The Winner is: #{cells.shift.value}     |"
+      puts "| The Winner is: #{cells.shift.value}                        |"
       puts "| Would you like to play again? [ Y | N ] |"
       puts "+=========================================+"
       input = gets
