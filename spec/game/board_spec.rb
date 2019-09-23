@@ -100,7 +100,7 @@ RSpec.describe Game::Board do
       let(:invalid_input) { '' }
       let(:valid_value) { 'X' }
       it "raises an exception" do
-        expect { subject.set_cell_value(input: invalid_input, value: valid_value) }.to raise_error(ArgumentError, "Could not update cell: #{invalid_input}")
+        expect { subject.set_cell_value(input: invalid_input, value: valid_value) }.to raise_error(ArgumentError, "Could not update cell: #{invalid_input}, value: #{valid_value}")
       end
     end
   end

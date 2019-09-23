@@ -1,25 +1,50 @@
 #! bin/sh env ruby
 
-# Import the main class to initialize the program
-
 require_relative '../lib/main.rb'
 
-### Add options
+def help
+  puts """
+    Thanks for playing my simple tic tack toe game
+        -h, --help   - This will display this menu
+          to play the game, simply run the script with `ruby ./bin/tic_tack_toe.rb`
 
-### If no options are passed, make the player X
+        -r, --rules  - Display the rules of the game
+      """
+end
 
-### help
+def rules
+  puts """
+    There is nothing special about this version of tic tack toe,
+    the goal is to get 3 of your simples in a row either vertically,
+    diagonally or horizontally.
 
-### Start
+    Each player will alternate turns until either a winner is crowned
+    or there are no more spots left to play on.
 
-### Choose your player: X or O
+    To choose a spot to play, please use the following system examples
+    A1, B3, C2
 
-main = TicTackToe::Main.new
-main.new_game
-# puts main.board.rows.collect {|r| r.cells.collect{|c| [c.x, c.y, c.value]}}
-main.play_turn
+    Thanks and good luck.
+  """
+end
 
-# main.set_cell_value(input: 'B1')
-# main.set_cell_value(input: 'B2')
-# main.set_cell_value(input: 'B3')
+def start_game
+  main = TicTackToe::Main.new
+  main.new_game
+  main.play_turn
+end
+
+first_argument = 
+
+if ARGV[0] == '--help' || ARGV[0] == '-h'
+  help
+  exit
+elsif ARGV[0] == '--rules' || ARGV[0] == '-r'
+  rules
+  exit
+else
+  start_game
+end
+
+
 

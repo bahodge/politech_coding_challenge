@@ -17,7 +17,7 @@ module Game
         row.cells[new_cell.x] = new_cell
         self.rows[row.y] = row
       else
-        raise ArgumentError, "Could not update cell: #{input}"
+        raise ArgumentError, "Could not update cell: #{input}, value: #{value}"
       end
     end
 
