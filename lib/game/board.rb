@@ -7,9 +7,10 @@ module Game
     def initialize(rows: nil)
       @rows = rows ? rows : initial_rows
     end
-
+    
     def set_cell_value(input:, value:)
       cell = find_cell_from_input(input: input)
+
       if cell&.can_update_value?
         new_cell = cell.set_value(new_value: value)
         row = cell.row
@@ -21,12 +22,21 @@ module Game
     end
 
     def draw_board
+ 
+      puts 
+      puts 
+      puts 
+      puts 
       puts board_header
       puts "1 -> #{rows[0].to_line}"
       puts '     ===+===+==='
       puts "2 -> #{rows[1].to_line}"
       puts '     ===+===+==='
       puts "3 -> #{rows[2].to_line}"
+      puts 
+      puts 
+      puts 
+      puts 
     end
 
     def find_row_by_y(y:)
@@ -35,11 +45,13 @@ module Game
 
     def find_cell_from_input(input:)
       coords = coords_from_input(input: input)
+    
       return nil unless valid_coords?(coords: coords)
-      return nil unless self.rows
+      return nil if self.rows.empty?
 
       row = find_row_by_y(y: coords.last)
-      row&.find_cell_by_x(x: coords.first)
+      result = row&.find_cell_by_x(x: coords.first)
+      result
     end
 
     # this returns a tuple of [x, y] coords
@@ -52,7 +64,7 @@ module Game
     end
 
     def valid_coords?(coords:)
-      return false if coords == -1
+      return false if coords.include?(-1)
       return false unless coords.length == 2
       return false unless coords.first <= 2 && coords.first >= 0
       return false unless coords.last <= 2 && coords.last >= 0

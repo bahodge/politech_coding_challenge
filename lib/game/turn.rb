@@ -6,17 +6,13 @@ module Game
       ['X', 'O']
     end
 
+    def current_turn
+      player
+    end
+
     def next_turn
       x_turn? ? Game::Turn.with(player: 'O') : Game::Turn.with(player: 'X')
     end
-
-    # def set_x_turn
-    #   Game::Turn.with(player: 'X')
-    # end
-
-    # def set_o_turn
-    #   Game::Turn.with(player: 'O')
-    # end
 
     def x_turn?
       self.player == 'X'

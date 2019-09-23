@@ -4,6 +4,7 @@ require_relative 'game/state'
 require_relative 'game/turn'
 require_relative 'game/board'
 require_relative 'game/winner_helper'
+require_relative 'game/computer'
 
 module TicTackToe
   class Main
@@ -22,12 +23,46 @@ module TicTackToe
       initial_game_board
     end
 
-    def play_game
+    def play_turn
+      puts "It is #{turn.current_turn}'s Turn"
+      if player == turn.current_turn
+        puts "Please Select an open cell: "
+        input = gets
+        set_cell_value(input: input)
+      else
+        handle_computer_move
+      end
+      handle_winner!
+      self.turn = turn.next_turn
+      
+      self.board.draw_board
+      play_turn
+      # next_turn
+      # who's turn is it?
+      
     end
 
-    def handle_winner(winning_cells:)
-      # find each cell and cross it out
-      puts "The Winner is: #{winning_cells.shift.value}"
+    def handle_computer_move
+      Game::Computer.with(board: self.board).make_move!
+    end
+
+    def handle_winner!
+      cells = check_for_winner!
+      return unless cells
+
+      self.board.draw_board
+
+      puts "+=========================================+"
+      puts "| The Winner is: #{cells.shift.value}     |"
+      puts "| Would you like to play again? [ Y | N ] |"
+      puts "+=========================================+"
+      input = gets
+      if input[0].upcase == "Y"
+        new_game
+      else
+        exit 0
+      end
+
     end
 
     def check_for_winner!
@@ -50,7 +85,6 @@ module TicTackToe
       sanitized_input = sanitize_move_input(input: input)
       begin
         board.set_cell_value(input: sanitized_input, value: turn.player)
-        next_turn
       rescue ArgumentError => e
         puts e
         puts "Please Try Again"
@@ -58,25 +92,18 @@ module TicTackToe
     end
 
     def sanitize_move_input(input:)
-      str = input.to_s.upcase.gsub(' ', '')
-      return -1 if str.length != 2
-
-      str
+      split_string = input.to_s.gsub(' ', '').split("")
+      fixed_string = "#{split_string[0]}#{split_string[1]}".upcase
+      return -1 unless fixed_string.length == 2
+      
+      fixed_string
     end
 
     private
 
     def set_computer_player
       self.computer = self.player == 'X' ? 'O' : 'X'
-      # puts "Computer is: #{computer}"
-    end
-
-    def next_turn
-      # check if someone won
-      # if no one won
-      # change the turn to the next person
-      # if someone won
-      # do winning things
+      puts "Computer is: #{computer}"
     end
 
     def initial_game_board

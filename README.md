@@ -31,3 +31,4 @@ This will acts as my development diary as I develop the application
 
 - Adding basic game functionality like tracking who's turn it is and alternating turns.
 - Checking to see if there is a winner
+- Adding main game / turn loop
